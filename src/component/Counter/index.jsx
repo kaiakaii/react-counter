@@ -4,30 +4,29 @@ class Counter extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { count: 0 };
+        this.state = { count: 0,size:0 };
     }
-    componentDidMount() {
-        console.log("*********************just do it!")
-    }
-  
-    componentWillUnmount() {
-        console.log("*********************bye bye!")
-    }
+
 
     onClickAdd=() => {
-        this.props.inParent()
         this.setState(state => {
-          return {count:state.count+1}
+            return {count:state.count+1}
         })
+        this.props.inParent()
     }
     onClickDel=() => {
-        this.props.delParent()
         this.setState({ count: this.state.count - 1 })
+        this.props.delParent()
     }
-    componentWillUnmount(){
-        this.props.moveParent(this.state.count)
+    static getDerivedStateFromProps(props,state) {
+        if(props.size !== state.size) {
+            return {
+                count : 0,
+                size : props.size
+            }
+        }
+        return null;
     }
-
 
     render() {
         return (
