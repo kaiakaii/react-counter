@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import CountGroup from './component/CountGroup';
+import ContainerCountGroup from './component/ContainerCountGroup';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CountGroup/>
+        <ContainerCountGroup/>
       </header>
     </div>
   );

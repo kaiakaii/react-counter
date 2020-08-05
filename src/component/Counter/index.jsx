@@ -12,17 +12,17 @@ class Counter extends React.Component {
         this.setState(state => {
             return {count:state.count+1}
         })
-        this.props.inParent()
+        this.props.updateAdd()
     }
     onClickDel=() => {
         this.setState({ count: this.state.count - 1 })
-        this.props.delParent()
+        this.props.updateDel()
     }
     static getDerivedStateFromProps(props,state) {
-        if(props.size !== state.size) {
+        if(props.groupSize !== state.size) {
             return {
                 count : 0,
-                size : props.size
+                size : props.groupSize
             }
         }
         return null;

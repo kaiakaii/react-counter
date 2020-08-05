@@ -2,47 +2,30 @@ import React from 'react';
 import Counter from '../Counter/index';
 
 class CountGroup extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { count: 0, total: 0 }
 
-    }
+    
     handelChange = event => {
-        this.setState({
-            count: Number(event.target.value),
-            total: 0
-        })
-    }
-    inParent = () => {
-        this.setState({
-            total: this.state.total + 1
-        })
-    }
-    delParent = () => {
-        this.setState({
-            total: this.state.total - 1
-        })
-
-    }
-    moveParent = value => {
-        console.log(value)
-        this.setState({
-            total: this.state.total - value
-        })
+        // console.log(this.props)
+        this.props.updateSize(Number(event.target.value))
     }
 
     render() {
-        const counterArray = [...Array(this.state.count).keys()];
+        const counterArray = [...Array(this.props.groupSize).keys()];
         return (
-            
             <div>
-                <span>Number of counters:</span><input type="number"  onChange={this.handelChange} />
-                <p>Total:{this.state.total}</p>
-                {counterArray.map((key) => <Counter key={key} inParent={this.inParent} delParent={this.delParent} size={this.state.count} />)}
+                <span>Number of counters:</span><input type="number" value={this.props.groupSize} onChange={this.handelChange} />
+                <hr/>
+                <p>Total:{this.props.total}</p>
+                {
+                    counterArray.map((key) => <Counter key={key} 
+                    updateAdd={this.props.updateAdd} 
+                    updateDel={this.props.updateDel}
+                    groupSize={this.props.groupSize} />)}
             </div>
 
         )
     }
+    
 
 }
 
